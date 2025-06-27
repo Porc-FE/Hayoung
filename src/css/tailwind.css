@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer {
+    .bg-img {
+        @apply absolute w-full h-full bg-cover bg-no-repeat bg-bottom;
+    }
+
+    @keyframes cloud-move {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    .animate-cloud {
+        animation: cloud-move 500s linear infinite;
+    }
+}
