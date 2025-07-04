@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Main() {
-    const flameImages = ["/flame1.png", "/flame2.png"];
-    const waveImages = ["/wave1.png", "/wave2.png", "/wave3.png", "/wave4.png"];
     const [flameIndex, setFlameIndex] = useState(0);
     const [waveIndex, setWaveIndex] = useState(0);
 
     useEffect(() => {
         const flameInterval = setInterval(() => {
-            setFlameIndex((prev: number) => (prev + 1) % flameImages.length);
-        }, 500);
+            setFlameIndex((prev) => (prev + 1) % 2);
+        }, 400);
 
         return () => clearInterval(flameInterval);
-    }, [flameImages.length]);
+    }, []);
 
     useEffect(() => {
         const waveInterval = setInterval(() => {
-            setWaveIndex((prev: number) => (prev + 1) % waveImages.length);
-        }, 1000);
+            setWaveIndex((prev) => (prev + 1) % 4);
+        }, 1200);
 
         return () => clearInterval(waveInterval);
-    }, [waveImages.length]);
+    }, []);
 
     return (
         <>
@@ -30,14 +28,22 @@ export default function Main() {
 
                 <div className="bg-img bg-[url('/sky.png')]" />
                 <div className="absolute bottom-0 w-full h-[20%] bg-[#836161]" />
-                <div
-                    className={`bg-img bg-[url('${waveImages[waveIndex]}')]`}
-                />
+                {waveIndex === 0 ? (
+                    <div className="bg-img bg-[url('/wave1.png')]" />
+                ) : waveIndex === 1 ? (
+                    <div className="bg-img bg-[url('/wave2.png')]" />
+                ) : waveIndex === 2 ? (
+                    <div className="bg-img bg-[url('/wave3.png')]" />
+                ) : (
+                    <div className="bg-img bg-[url('/wave4.png')]" />
+                )}
                 <div className="bg-img bg-[url('/clouds.png')] animate-cloud" />
                 <div className="bg-img bg-[url('/character1.png')]" />
-                <div
-                    className={`bg-img bg-[url('${flameImages[flameIndex]}')]`}
-                />
+                {flameIndex === 0 ? (
+                    <div className="bg-img bg-[url('/flame1.png')]" />
+                ) : (
+                    <div className="bg-img bg-[url('/flame2.png')]" />
+                )}
 
                 {/* 텍스처 필터 */}
                 <div className="absolute inset-0 bg-[url('/filter.svg')] bg-repeat opacity-30 mix-blend-multiply" />
