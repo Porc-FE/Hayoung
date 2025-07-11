@@ -1,2 +1,7 @@
 @import "./tailwind.css";
 @import "./font.css";
+
+html,
+body {
+    overflow: hidden;
+}
